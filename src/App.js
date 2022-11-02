@@ -1,11 +1,8 @@
-import logo from "./logo.svg";
-import "./App.css";
-import TodoList from "./Components/TodoList";
-
+import { Main } from "./components/Main";
 function App() {
   return (
     <div className="App">
-      <TodoList />
+      <Main />
     </div>
   );
 }

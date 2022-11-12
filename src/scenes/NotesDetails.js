@@ -8,8 +8,8 @@ const NotesDetails = () => {
   const note = notes.find((note) => note.id === notesId);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedData, setUpdatedData] = useState({
-    title: note.title || "",
-    content: note.content || "",
+    title: (note && note.title) || "",
+    content: (note && note.content) || "",
   });
 
   const saveHandler = () => {

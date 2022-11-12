@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NotesContext } from "../contexts/NotesContext";
+import { v4 as uuid } from "uuid";
 
 const fakeNotes = [
   {
@@ -10,6 +11,7 @@ const fakeNotes = [
 ];
 const NotesProviders = ({ children }) => {
   const [notes, setNotes] = React.useState(fakeNotes);
+
   return (
     <NotesContext.Provider value={[notes, setNotes]}>
       {children}
@@ -19,7 +21,11 @@ const NotesProviders = ({ children }) => {
 
 const useNote = () => {
   const [notes, setNotes] = React.useContext(NotesContext);
-  return [notes, setNotes];
+
+  const createNote = (title) => {
+    setNotes(notes.concat({ id: uuid(), title, content: "" }));
+  };
+  return [notes, createNote];
 };
 
 export { NotesProviders, useNote };

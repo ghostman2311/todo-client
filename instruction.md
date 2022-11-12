@@ -20,3 +20,9 @@
 1. Create modal component and manage the state in notesPage.
 2. What is event bubbling and event capturing.
 3. How and why we are using e.stopPropagation()?
+
+## Create new note in context
+
+1. Create NotesForm in component.
+2. Create a function createNewNote in useNote() hook.
+3. Attach the the function function with the form.

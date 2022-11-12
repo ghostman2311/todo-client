@@ -1,6 +1,8 @@
 import { NoteList } from "../components/NoteList";
+import { useNote } from "../providers/NotesProviders";
 
-const NotesPage = ({ notes }) => {
+const NotesPage = () => {
+  const [notes] = useNote();
   return (
     <>
       <h1>My Notes Page</h1>

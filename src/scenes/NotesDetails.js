@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNote } from "../providers/NotesProviders";
 
-const NotesDetails = ({ notes }) => {
+const NotesDetails = () => {
+  const [notes] = useNote();
   const { notesId } = useParams();
   const note = notes.find((note) => note.id === notesId);
   const [isEditing, setIsEditing] = useState(false);

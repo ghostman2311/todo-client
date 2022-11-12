@@ -1,24 +1,16 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { NotesPage } from "../../scenes/NotesPage";
-import { NotesDetails } from "../NotesDetails";
-
-const notes = [
-  {
-    id: "1",
-    title: "My First note",
-    content: "Hey there this is my first note",
-  },
-];
+import { NotesDetails } from "../../scenes/NotesDetails";
 
 const Main = () => {
   return (
     <Router>
       <Switch>
         <Route path="/notes" exact>
-          <NotesPage notes={notes} />
+          <NotesPage />
         </Route>
         <Route path="/notes/:notesId">
-          <NotesDetails notes={notes} />
+          <NotesDetails />
         </Route>
         <Route path="*">Not Found Page</Route>
       </Switch>

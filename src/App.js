@@ -1,8 +1,12 @@
 import { Main } from "./components/Main";
+import { NotesProviders } from "./providers/NotesProviders";
+
 function App() {
   return (
     <div className="App">
-      <Main />
+      <NotesProviders>
+        <Main />
+      </NotesProviders>
     </div>
   );
 }

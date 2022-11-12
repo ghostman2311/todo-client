@@ -14,3 +14,9 @@
 ## Store Note Data inside a context provider
 
 1. Create note Context, Provider and useNote hook.
+
+## Add a create new modal
+
+1. Create modal component and manage the state in notesPage.
+2. What is event bubbling and event capturing.
+3. How and why we are using e.stopPropagation()?

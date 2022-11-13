@@ -26,3 +26,10 @@
 1. Create NotesForm in component.
 2. Create a function createNewNote in useNote() hook.
 3. Attach the the function function with the form.
+
+## Deleting the note in context
+
+1. Create DeleteConfirm component, which accepts onConfirm and onDeny.
+2. Add delete button to notes list.
+3. Create state which handle the selected note id for delete.
+4. Implement delete function in context.

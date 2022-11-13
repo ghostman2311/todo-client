@@ -25,7 +25,11 @@ const useNote = () => {
   const createNote = (title) => {
     setNotes(notes.concat({ id: uuid(), title, content: "" }));
   };
-  return [notes, createNote];
+
+  const deleteNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+  return [notes, createNote, deleteNote];
 };
 
 export { NotesProviders, useNote };

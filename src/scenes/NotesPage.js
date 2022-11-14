@@ -6,7 +6,7 @@ import { NotesForm } from "../components/NotesForm";
 import { DeleteForm } from "../components/DeleteForm";
 
 const NotesPage = () => {
-  const [notes, createNote, deleteNote] = useNote();
+  const { notes, createNote, deleteNote } = useNote();
   const [isOpen, setIsOpen] = useState(false);
   const [currentlyDeletingNoteID, setCurrentlyDeletingNoteID] = useState("");
 

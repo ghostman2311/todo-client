@@ -3,24 +3,25 @@ import { useParams } from "react-router-dom";
 import { useNote } from "../providers/NotesProviders";
 
 const NotesDetails = () => {
-  const [notes] = useNote();
+  const { notes, updateNote } = useNote();
   const { notesId } = useParams();
   const note = notes.find((note) => note.id === notesId);
   const [isEditing, setIsEditing] = useState(false);
-  const [updatedData, setUpdatedData] = useState({
-    title: (note && note.title) || "",
-    content: (note && note.content) || "",
-  });
+  const [updatedTitle, setUpdatedTitle] = useState(note && note.title);
+  const [updatedContent, setUpdatedContent] = useState(note && note.content);
 
   const saveHandler = () => {
-    console.log({ ...updatedData });
+    updateNote(notesId, {
+      title: updatedTitle,
+      content: updatedContent,
+    });
+    setIsEditing(false);
   };
+
   const cancelHandler = () => {
-    setUpdatedData((prev) => ({
-      ...prev,
-      title: note.title,
-      content: note.title,
-    }));
+    setUpdatedContent(note.content);
+    setUpdatedTitle(note.title);
+
     setIsEditing(false);
   };
 
@@ -28,18 +29,14 @@ const NotesDetails = () => {
     return (
       <>
         <input
-          value={updatedData.title}
-          onChange={(e) =>
-            setUpdatedData((prev) => ({ ...prev, title: e.target.value }))
-          }
+          value={updatedTitle}
+          onChange={(e) => setUpdatedTitle(e.target.value)}
           placeholder="Enter Title"
           type="text"
         />
         <textarea
-          value={updatedData.content}
-          onChange={(e) =>
-            setUpdatedData((prev) => ({ ...prev, content: e.target.value }))
-          }
+          value={updatedContent}
+          onChange={(e) => setUpdatedContent(e.target.value)}
           placeholder="Enter Description"
         />
         <button onClick={cancelHandler}>Cancel</button>

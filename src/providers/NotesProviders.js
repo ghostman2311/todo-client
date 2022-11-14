@@ -29,7 +29,15 @@ const useNote = () => {
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
-  return [notes, createNote, deleteNote];
+
+  const updateNote = (id, { title, content }) => {
+    setNotes(
+      notes.map((note) => {
+        return note.id === id ? { id, title, content } : note;
+      })
+    );
+  };
+  return { notes, createNote, deleteNote, updateNote };
 };
 
 export { NotesProviders, useNote };

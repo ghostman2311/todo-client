@@ -5,15 +5,17 @@ import { NotesDetails } from "../../scenes/NotesDetails";
 const Main = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/notes" exact>
-          <NotesPage />
-        </Route>
-        <Route path="/notes/:notesId">
-          <NotesDetails />
-        </Route>
-        <Route path="*">Not Found Page</Route>
-      </Switch>
+      <div className="content-container">
+        <Switch>
+          <Route path="/notes" exact>
+            <NotesPage />
+          </Route>
+          <Route path="/notes/:notesId">
+            <NotesDetails />
+          </Route>
+          <Route path="*">Not Found Page</Route>
+        </Switch>
+      </div>
     </Router>
   );
 };

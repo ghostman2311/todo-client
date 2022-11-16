@@ -29,25 +29,33 @@ const NotesDetails = () => {
     return (
       <>
         <input
+          className="full-width space-below"
           value={updatedTitle}
           onChange={(e) => setUpdatedTitle(e.target.value)}
           placeholder="Enter Title"
           type="text"
         />
         <textarea
+          className="full-width space-below"
           value={updatedContent}
           onChange={(e) => setUpdatedContent(e.target.value)}
           placeholder="Enter Description"
         />
-        <button onClick={cancelHandler}>Cancel</button>
-        <button onClick={saveHandler}>Submit</button>
+        <div className="evenly-spaced">
+          <button onClick={cancelHandler}>Cancel</button>
+          <button onClick={saveHandler}>Submit</button>
+        </div>
       </>
     );
   }
   return (
     <>
       <h1>{note.title}</h1>
-      <p>{note.content}</p>
+      {note.content ? (
+        <p>{note.content}</p>
+      ) : (
+        <p className="weak">This note does not have any content</p>
+      )}
       <button onClick={() => setIsEditing(true)}>Edit</button>
     </>
   );

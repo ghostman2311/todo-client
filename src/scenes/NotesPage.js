@@ -37,7 +37,9 @@ const NotesPage = () => {
         notes={notes}
         onRequestDelete={(id) => setCurrentlyDeletingNoteID(id)}
       />
-      <button onClick={() => setIsOpen(true)}>+ Add Note</button>
+      <button className="full-width" onClick={() => setIsOpen(true)}>
+        + Add Note
+      </button>
     </>
   );
 };

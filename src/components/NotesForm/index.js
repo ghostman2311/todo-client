@@ -6,12 +6,15 @@ const NotesForm = ({ onSubmit = () => {} }) => {
   return (
     <>
       <input
+        className="full-width space-below"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         type="text"
         placeholder="Enter Title"
       />
-      <button onClick={() => onSubmit(title)}>Submit</button>
+      <button className="full-width" onClick={() => onSubmit(title)}>
+        Submit
+      </button>
     </>
   );
 };

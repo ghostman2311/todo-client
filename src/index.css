@@ -55,6 +55,19 @@ textarea {
   font-style: italic;
 }
 
+.note-list-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 16px;
+}
+
+.note-list-item:hover {
+  background-color: #eee;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -4,11 +4,13 @@ import { useNote } from "../providers/NotesProviders";
 import { Modal } from "../components/Modal";
 import { NotesForm } from "../components/NotesForm";
 import { DeleteForm } from "../components/DeleteForm";
+import { useHistory } from "react-router-dom";
 
 const NotesPage = () => {
   const { notes, createNote, deleteNote } = useNote();
   const [isOpen, setIsOpen] = useState(false);
   const [currentlyDeletingNoteID, setCurrentlyDeletingNoteID] = useState("");
+  const history = useHistory();
 
   return (
     <>
@@ -36,6 +38,7 @@ const NotesPage = () => {
       <NoteList
         notes={notes}
         onRequestDelete={(id) => setCurrentlyDeletingNoteID(id)}
+        onClickItem={(id) => history.push(`notes/${id}`)}
       />
       <button className="full-width" onClick={() => setIsOpen(true)}>
         + Add Note

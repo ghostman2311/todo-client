@@ -1,19 +1,25 @@
-import { Link } from "react-router-dom";
-
-const NoteList = ({ notes, onRequestDelete }) => {
+import { Xbutton } from "./XButton";
+const NoteList = ({ notes, onRequestDelete, onClickItem }) => {
   return (
     <>
       {notes.map((note) => {
         return (
-          <div key={note.id}>
-            <h3>{note.title}</h3>
-            <p>{note.content.split(" ").length} word(s)</p>
-            <div style={{ paddingBottom: "6px" }} className="evenly-spaced">
-              <button onClick={() => onRequestDelete(note.id)}>Delete</button>
-              <Link to={`/notes/${note.id}`}>
-                <button className="full-width">View</button>
-              </Link>
+          <div
+            className="note-list-item"
+            key={note.id}
+            onClick={() => onClickItem(note.id)}
+          >
+            <div style={{ flex: 1 }}>
+              <h3>{note.title}</h3>
+              <p>{note.content.split(" ").length} word(s)</p>
             </div>
+
+            <Xbutton
+              onClick={(e) => {
+                e.stopPropagation();
+                onRequestDelete(note.id);
+              }}
+            />
           </div>
         );
       })}

@@ -1,3 +1,4 @@
+import { Xbutton } from "../XButton";
 import "./style.css";
 
 const Modal = ({ isOpen, onRequestClose, children }) => {
@@ -8,7 +9,7 @@ const Modal = ({ isOpen, onRequestClose, children }) => {
       <div className="modal-body" onClick={(e) => e.stopPropagation()}>
         <div className="modal-top-bar">
           <div className="modal-close-button">
-            <button onClick={onRequestClose}>Close</button>
+            <Xbutton onClick={onRequestClose} />
           </div>
         </div>
         {children}

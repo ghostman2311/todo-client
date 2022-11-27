@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import { CreateAccountForm } from "../components/CreateAccountForm";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
-  const registerHandler = () => {};
+  const history = useHistory();
+
+  const registerHandler = async (email, password, confirmPassword) => {
+    console.log(password, confirmPassword, password === confirmPassword);
+    if (password === confirmPassword) {
+      await createUserWithEmailAndPassword(getAuth(), email, password);
+      history.push("/notes");
+    }
+  };
   return (
     <>
       <h1 className="h-centered">Register</h1>

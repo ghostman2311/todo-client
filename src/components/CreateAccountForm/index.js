@@ -30,7 +30,7 @@ const CreateAccountForm = ({ onSubmit }) => {
       />
       <button
         className="full-width space-below"
-        onClick={() => onSubmit(email, password)}
+        onClick={() => onSubmit(email, password, confirmPassword)}
       >
         Create
       </button>

@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
-  const loginHandler = (email, password) => {};
+  const history = useHistory();
+
+  const loginHandler = async (email, password) => {
+    await signInWithEmailAndPassword(getAuth(), email, password);
+    history.push("/notes");
+  };
   return (
     <div>
       <h1 className="h-centered">Login</h1>

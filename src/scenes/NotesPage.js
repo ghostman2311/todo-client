@@ -16,8 +16,8 @@ const NotesPage = () => {
     <>
       <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
         <NotesForm
-          onSubmit={(title) => {
-            createNote(title);
+          onSubmit={async (title) => {
+            await createNote(title);
             setIsOpen(false);
           }}
         />
@@ -27,19 +27,23 @@ const NotesPage = () => {
         onRequestClose={() => setCurrentlyDeletingNoteID("")}
       >
         <DeleteForm
-          onConfirm={() => {
-            deleteNote(currentlyDeletingNoteID);
+          onConfirm={async () => {
+            await deleteNote(currentlyDeletingNoteID);
             setCurrentlyDeletingNoteID("");
           }}
           onDeny={() => setCurrentlyDeletingNoteID("")}
         />
       </Modal>
       <h1>My Notes Page</h1>
-      <NoteList
-        notes={notes}
-        onRequestDelete={(id) => setCurrentlyDeletingNoteID(id)}
-        onClickItem={(id) => history.push(`notes/${id}`)}
-      />
+      {notes ? (
+        <NoteList
+          notes={notes}
+          onRequestDelete={(id) => setCurrentlyDeletingNoteID(id)}
+          onClickItem={(id) => history.push(`notes/${id}`)}
+        />
+      ) : (
+        <p className="weak">No Note Exist yet, Click to create one</p>
+      )}
       <button className="full-width" onClick={() => setIsOpen(true)}>
         + Add Note
       </button>

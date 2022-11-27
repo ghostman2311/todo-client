@@ -5,13 +5,13 @@ import { useNote } from "../providers/NotesProviders";
 const NotesDetails = () => {
   const { notes, updateNote } = useNote();
   const { notesId } = useParams();
-  const note = notes.find((note) => note.id === notesId);
+  const note = notes?.find((note) => note.id === notesId);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTitle, setUpdatedTitle] = useState(note && note.title);
   const [updatedContent, setUpdatedContent] = useState(note && note.content);
 
-  const saveHandler = () => {
-    updateNote(notesId, {
+  const saveHandler = async () => {
+    await updateNote(notesId, {
       title: updatedTitle,
       content: updatedContent,
     });

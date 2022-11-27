@@ -5,9 +5,11 @@ const Register = () => {
   const registerHandler = () => {};
   return (
     <>
-      <h1>Register</h1>
+      <h1 className="h-centered">Register</h1>
       <CreateAccountForm onSubmit={registerHandler} />
-      <Link to="/login">Have an account? Click to Login</Link>
+      <Link style={{ display: "block" }} className="h-centered" to="/login">
+        Have an account? Click to Login
+      </Link>
     </>
   );
 };

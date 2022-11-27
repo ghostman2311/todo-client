@@ -4,11 +4,13 @@ import { LoginForm } from "../components/LoginForm";
 const Login = () => {
   const loginHandler = (email, password) => {};
   return (
-    <>
-      <h1>Login</h1>
+    <div>
+      <h1 className="h-centered">Login</h1>
       <LoginForm onSubmit={loginHandler} />
-      <Link to="/register">Don't have an accoutn yet? Click to register</Link>
-    </>
+      <Link style={{ display: "block" }} className="h-centered" to="/register">
+        Don't have an accoutn yet? Click to register
+      </Link>
+    </div>
   );
 };
 

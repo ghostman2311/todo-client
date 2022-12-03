@@ -7,7 +7,6 @@ const Register = () => {
   const history = useHistory();
 
   const registerHandler = async (email, password, confirmPassword) => {
-    console.log(password, confirmPassword, password === confirmPassword);
     if (password === confirmPassword) {
       await createUserWithEmailAndPassword(getAuth(), email, password);
       history.push("/notes");

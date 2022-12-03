@@ -5,16 +5,20 @@ import { Navigation } from "../Navigation";
 import { Login } from "../../scenes/Login";
 import { Register } from "../../scenes/Register";
 import { ProtectedRoute } from "../ProtectedRoute";
+import { useUser } from "../../hooks/useUser";
 
 const Main = () => {
-  let canAccess = true;
+  const { user, userIsLoading } = useUser();
+
+  let isLoggedIn = !!user;
   return (
     <Router>
       <Navigation />
       <div className="content-container">
         <Switch>
           <ProtectedRoute
-            canAccess={canAccess}
+            isLoading={userIsLoading}
+            canAccess={isLoggedIn}
             redirectTo="/login"
             path="/notes"
             exact
@@ -22,21 +26,24 @@ const Main = () => {
             <NotesPage />
           </ProtectedRoute>
           <ProtectedRoute
-            canAccess={canAccess}
+            isLoading={userIsLoading}
+            canAccess={isLoggedIn}
             redirectTo={"/login"}
             path="/notes/:notesId"
           >
             <NotesDetails />
           </ProtectedRoute>
           <ProtectedRoute
-            canAccess={!canAccess}
+            isLoading={userIsLoading}
+            canAccess={!isLoggedIn}
             redirectTo="/notes"
             path="/login"
           >
             <Login />
           </ProtectedRoute>
           <ProtectedRoute
-            canAccess={!canAccess}
+            isLoading={userIsLoading}
+            canAccess={!isLoggedIn}
             redirectTo="/notes"
             path="/register"
           >

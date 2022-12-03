@@ -1,22 +1,12 @@
 import * as React from "react";
 import { NotesContext } from "../contexts/NotesContext";
 import axios from "axios";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useUser } from "../hooks/useUser";
 
 const NotesProviders = ({ children }) => {
   const [notes, setNotes] = React.useState([]);
   const [status, setStatus] = React.useState("idle");
-  const [user, setUser] = React.useState(null);
-
-  React.useEffect(() => {
-    setStatus("pending");
-    const cancelSubscription = onAuthStateChanged(getAuth(), (user) => {
-      setUser(user);
-      setStatus("resolved");
-    });
-
-    return cancelSubscription;
-  }, []);
+  const { user } = useUser();
 
   React.useEffect(() => {
     const loadNotes = async () => {

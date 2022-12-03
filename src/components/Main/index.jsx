@@ -4,25 +4,44 @@ import { NotesDetails } from "../../scenes/NotesDetails";
 import { Navigation } from "../Navigation";
 import { Login } from "../../scenes/Login";
 import { Register } from "../../scenes/Register";
+import { ProtectedRoute } from "../ProtectedRoute";
 
 const Main = () => {
+  let canAccess = true;
   return (
     <Router>
       <Navigation />
       <div className="content-container">
         <Switch>
-          <Route path="/notes" exact>
+          <ProtectedRoute
+            canAccess={canAccess}
+            redirectTo="/login"
+            path="/notes"
+            exact
+          >
             <NotesPage />
-          </Route>
-          <Route path="/notes/:notesId">
+          </ProtectedRoute>
+          <ProtectedRoute
+            canAccess={canAccess}
+            redirectTo={"/login"}
+            path="/notes/:notesId"
+          >
             <NotesDetails />
-          </Route>
-          <Route path="/login">
+          </ProtectedRoute>
+          <ProtectedRoute
+            canAccess={!canAccess}
+            redirectTo="/notes"
+            path="/login"
+          >
             <Login />
-          </Route>
-          <Route path="/register">
+          </ProtectedRoute>
+          <ProtectedRoute
+            canAccess={!canAccess}
+            redirectTo="/notes"
+            path="/register"
+          >
             <Register />
-          </Route>
+          </ProtectedRoute>
           <Route path="*">Not Found Page</Route>
         </Switch>
       </div>

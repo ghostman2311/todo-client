@@ -1,43 +1,47 @@
 import * as React from "react";
 import { NotesContext } from "../contexts/NotesContext";
-import axios from "axios";
 import { useUser } from "../hooks/useUser";
+import { useAuthedRequest } from "../hooks/useAuthedRequest";
 
 const NotesProviders = ({ children }) => {
   const [notes, setNotes] = React.useState([]);
   const [status, setStatus] = React.useState("idle");
   const { user } = useUser();
+  const { get, post, put, del, isReady } = useAuthedRequest();
 
   React.useEffect(() => {
     const loadNotes = async () => {
       try {
         setStatus("pending");
-        const response = await axios.get(`/users/${user.uid}/notes`);
-        setNotes(response.data);
+        const response = await get(`/users/${user.uid}/notes`);
+        setNotes(response);
         setStatus("resolved");
       } catch (e) {
         console.log(e);
         setStatus("rejected");
       }
     };
-    if (user) {
+    if (user && isReady) {
       loadNotes();
     }
-  }, [user]);
+  }, [user, get, isReady]);
   return (
-    <NotesContext.Provider value={{ notes, setNotes, status, user }}>
+    <NotesContext.Provider
+      value={{ notes, setNotes, status, user, get, post, put, del }}
+    >
       {children}
     </NotesContext.Provider>
   );
 };
 
 const useNote = () => {
-  const { notes, setNotes, status, user } = React.useContext(NotesContext);
+  const { notes, setNotes, status, user, post, put, del } =
+    React.useContext(NotesContext);
 
   const createNote = async (title) => {
     try {
-      const response = await axios.post(`/users/${user.uid}/notes`, { title });
-      setNotes(notes.concat(response.data));
+      const response = await post(`/users/${user.uid}/notes`, { title });
+      setNotes(notes.concat(response));
     } catch (e) {
       console.log(e);
     }
@@ -45,7 +49,7 @@ const useNote = () => {
 
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`/notes/${id}`);
+      await del(`/notes/${id}`);
       setNotes(notes.filter((note) => note.id === id));
     } catch (e) {
       console.log(e);
@@ -54,8 +58,7 @@ const useNote = () => {
 
   const updateNote = async (id, { title, content }) => {
     try {
-      const response = await axios.put(`/notes/${id}`, { title, content });
-      const updatedNote = response.data;
+      const updatedNote = await put(`/notes/${id}`, { title, content });
       setNotes(notes.map((note) => (note.id === id ? updatedNote : note)));
     } catch (e) {
       console.log(e);
